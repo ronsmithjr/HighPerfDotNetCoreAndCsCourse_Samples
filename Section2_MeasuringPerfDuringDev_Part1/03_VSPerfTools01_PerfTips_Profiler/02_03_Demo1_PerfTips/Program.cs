@@ -13,13 +13,20 @@ namespace _02_03_Demo1_PerfTips
     /// </summary>
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            HistoricalPriceReader hpr = new HistoricalPriceReader();
-            var historicalData = hpr.GetHistoricalQuotes("MSFT");
-
-            var data = Rsi.CalculateRsi(historicalData, 14, CancellationToken.None);
-            Debug.WriteLine($"Number of RSI Values: {data.Count()}");
+            try
+            {
+                HistoricalPriceReader hpr = new HistoricalPriceReader();
+                var historicalData = hpr.GetHistoricalQuotes("MSFT");
+            
+                var data = Rsi.CalculateRsi(historicalData, 14, CancellationToken.None);
+                Console.WriteLine($"Number of RSI Values: {data.Count()}");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
